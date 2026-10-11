@@ -30,14 +30,14 @@ def main(args: argparse.Namespace) -> list[float]:
         # Note that you can just append x^order to the features from the previous iteration.
         column = np.power(xs, order).reshape(args.data_size, 1)
         if order == 1:
-            features = column
+            x = column
         else:
-            features = np.hstack([features, column])
+            x = np.hstack([x, column])
 
         # TODO: Split the data into a train set and a test set.
         # Use `sklearn.model_selection.train_test_split` method call, passing
         # arguments `test_size=args.test_size, random_state=args.seed`.
-        train_data, test_data, train_target, test_target = sklearn.model_selection.train_test_split(features, ys, test_size=args.test_size, random_state=args.seed)
+        train_data, test_data, train_target, test_target = sklearn.model_selection.train_test_split(x, ys, test_size=args.test_size, random_state=args.seed)
 
         # TODO: Fit a linear regression model `sklearn.linear_model.LinearRegression(tol=1e-15)`
         # on the train set using the `fit` method. We use a stricter tolerance `tol=1e-15`
