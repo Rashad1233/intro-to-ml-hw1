@@ -34,9 +34,9 @@ def main(args: argparse.Namespace) -> float:
 
     # TODO: Solve the linear regression using the algorithm from the lecture,
     # explicitly computing the matrix inverse (using `np.linalg.inv`).
-    w = np.matmul(np.matmul(np.linalg.inv(np.matmul(X_train.T, X_train)), X_train.T), y_train)
+    w = np.linalg.inv(X_train.T @ X_train) @ X_train.T @ y_train
     # TODO: Predict target values on the test set.
-    y_pred = np.matmul(X_test, w)
+    y_pred = X_test @ w
 
     # TODO: Manually compute root mean square error on the test set predictions.
     rmse = np.sqrt(np.mean((y_test - y_pred) ** 2))
