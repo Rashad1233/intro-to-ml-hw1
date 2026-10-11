@@ -30,27 +30,27 @@ def main(args: argparse.Namespace) -> list[float]:
         # Note that you can just append x^order to the features from the previous iteration.
         column = np.power(xs, order).reshape(args.data_size, 1)
         if order == 1:
-            train_data = column
+            features = column
         else:
-            train_data = np.hstack([train_data, column])
+            features = np.hstack([features, column])
 
         # TODO: Split the data into a train set and a test set.
         # Use `sklearn.model_selection.train_test_split` method call, passing
         # arguments `test_size=args.test_size, random_state=args.seed`.
-        X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(train_data, ys, test_size=args.test_size, random_state=args.seed)
+        train_data, test_data, train_target, test_target = sklearn.model_selection.train_test_split(features, ys, test_size=args.test_size, random_state=args.seed)
 
         # TODO: Fit a linear regression model `sklearn.linear_model.LinearRegression(tol=1e-15)`
         # on the train set using the `fit` method. We use a stricter tolerance `tol=1e-15`
         # as the default tolerance is not sufficient when using features of higher order.
-        model = sklearn.linear_model.LinearRegression(tol=1e-15).fit(X_train, y_train)
+        model = sklearn.linear_model.LinearRegression(tol=1e-15).fit(train_data, train_target)
 
         # TODO: Predict targets on the test set using the `predict` method of the trained model.
-        y_predicted = model.predict(X_test)
+        y_predicted = model.predict(test_data)
 
         # TODO: Compute root mean square error on the test set predictions.
         # You can either do it manually, or you can look at the metrics offered
         # by the `sklearn.metrics` module.
-        rmse = np.sqrt(sklearn.metrics.mean_squared_error(y_test, y_predicted))
+        rmse = np.sqrt(sklearn.metrics.mean_squared_error(test_target, y_predicted))
 
         rmses.append(rmse)
 
