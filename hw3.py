@@ -70,7 +70,7 @@ def main(args: argparse.Namespace) -> tuple[list[float], float, float]:
 
     # TODO: Compute into `explicit_rmse` test data RMSE when fitting
     # `sklearn.linear_model.LinearRegression()` on `train_data` (ignoring `args.l2`).
-    model = sklearn.linear_model.LinearRegression(fit_intercept=False)
+    model = sklearn.linear_model.LinearRegression()
     model.fit(train_data, train_target)
     y_predicted = model.predict(test_data)
     rmse = np.sqrt(sklearn.metrics.mean_squared_error(test_target, y_predicted))
