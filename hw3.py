@@ -65,8 +65,8 @@ def main(args: argparse.Namespace) -> tuple[list[float], float, float]:
           gradient += args.l2*weights_with_bias_set_to_zero 
           weights -= args.learning_rate*gradient
         # TODO: Append current RMSE on train/test to `train_rmses`/`test_rmses`.
-          train_rmses.append(np.sqrt(sklearn.metrics.mean_squared_error(train_target, train_data @ weights)))
-          test_rmses.append(np.sqrt(sklearn.metrics.mean_squared_error(test_target, test_data @ weights)))
+        train_rmses.append(np.sqrt(sklearn.metrics.mean_squared_error(train_target, train_data @ weights)))
+        test_rmses.append(np.sqrt(sklearn.metrics.mean_squared_error(test_target, test_data @ weights)))
 
     # TODO: Compute into `explicit_rmse` test data RMSE when fitting
     # `sklearn.linear_model.LinearRegression()` on `train_data` (ignoring `args.l2`).
