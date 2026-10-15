@@ -74,7 +74,7 @@ def main(args: argparse.Namespace) -> tuple[np.ndarray, np.ndarray]:
     # however, you can combine the two methods into a single `fit_transform` call).
     # Finally, transform testing data to `test_data`.
     train_data = pipeline.fit_transform(train_data)
-    test_data = pipeline.fit_transform(test_data)
+    test_data = pipeline.transform(test_data)
 
     return train_data[:5], test_data[:5]
 
